@@ -38,42 +38,47 @@ options {
                 }
             }
         }
-        stage('Terraform plan'){
-                            sh 'terraform plan -out=plan.out'
-                        }
-                        break
-                        
-                        case 'Apply':
-                        when {
-        expression {
-            // Only apply if the plan was successful
-            return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
-        }
-                        }
-                        stage('Terraform Apply') {
-                             // terraform plan output saved in plan.output file
-                            sh 'terraform plan -out=plan.out'
-                            timeout(time: 1, unit: 'MINUTES'){
-                                input "Do you want to proceed"
-                            }
-                             sh 'terraform apply "plan.out"'
-                        }
-                        break
-                        
-                        case 'Destroy':
-                        stage('Terraform Destroy'){
-                            sh 'terraform plan'
-                            timeout(time: 1, unit: 'MINUTES'){
-                                input "Do you want to destroy all resources"
-                            }
-                            // to destroy the all resource
-                            sh 'terraform destroy --auto-approve'
-                        }
-                        break
-                    }
+        stage('Terraform Plan') {
+            when {
+                expression { params.Plan }
+            }
+            steps {
+                script {
+                    echo 'Executing terraform plan...'
+                    sh 'terraform plan -out=plan.out'
                 }
-            
-        
-    
+            }
+        }
 
-                
+        stage('Terraform Apply') {
+            when {
+                expression { params.Apply }
+            }
+            steps {
+                script {
+                    echo 'Executing terraform apply...'
+                    sh 'terraform apply "plan.out"'
+                }
+            }
+        }
+
+        stage('Terraform Destroy') {
+            when {
+                expression { params.Destroy }
+            }
+            steps {
+                script {
+                    echo 'Executing terraform destroy...'
+                    sh 'terraform destroy -auto-approve'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Clean up steps if needed
+        }
+    }
+}
+
