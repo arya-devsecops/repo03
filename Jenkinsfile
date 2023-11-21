@@ -64,7 +64,7 @@ options {
 
         stage('Terraform Destroy') {
             when {
-                expression { params.Action in ['Apply', 'Destroy'] }
+                expression { params.Action in ['Plan', 'Destroy'] }
             }
             steps {
                 script {
