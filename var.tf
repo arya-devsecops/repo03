@@ -1,4 +1,4 @@
-variable "resource_name" {
+variable "resource_name" 
   description = "Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
   type    = string
   default = "example_resources"
