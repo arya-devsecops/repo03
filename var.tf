@@ -7,7 +7,7 @@ variable "resource_name" {
 variable "location" {
   description = "Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created."
   type    = string
-  default = ""
+  default = "westus2"
 }
 
 variable "storage_name" {
