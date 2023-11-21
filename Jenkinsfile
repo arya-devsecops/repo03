@@ -38,10 +38,7 @@ options {
                 }
             }
         }
-                    switch (params.Action) {
-                        
-                        case 'Plan':
-                        stage('Terraform plan'){
+        stage('Terraform plan'){
                             sh 'terraform plan -out=plan.out'
                         }
                         break
@@ -75,7 +72,7 @@ options {
                         break
                     }
                 }
-            }
+            
         
     
 
