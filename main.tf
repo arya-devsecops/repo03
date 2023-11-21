@@ -1,7 +1,7 @@
 resource "azurerm_resource_group" "exp" {
   name     = var.resource_name
   location = var.location
-}
+
 
 # resource "azurerm_storage_account" "test03" {
 #   name                     = var.storage_name
