@@ -13,7 +13,7 @@ variable "location" {
 variable "storage_name" {
   description = "storage account name"
   type = any
-  default = "storage"
+  default = "dsostsbx01"
   
 }
 
