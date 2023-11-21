@@ -41,9 +41,6 @@ options {
         stage('Terraform Plan') {
             when {
                 expression { params.Plan }
-       
-            // Only apply if the plan was successful
-            return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
             }
             steps {
                 script {
