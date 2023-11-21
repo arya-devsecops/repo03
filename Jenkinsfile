@@ -40,7 +40,7 @@ options {
         }
          stage('Terraform Plan') {
             when {
-                expression { params.Action in ['Plan'] }
+                expression { params.Action == 'Plan' }
             }
             steps {
                 script {
