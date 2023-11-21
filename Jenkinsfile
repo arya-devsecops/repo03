@@ -35,15 +35,24 @@ options {
             steps {
                 script {
                     sh 'terraform validate'
+                }
+            }
+        }
                     switch (params.Action) {
                         
                         case 'Plan':
                         stage('Terraform plan'){
-                            sh 'terraform plan'
+                            sh 'terraform plan -out=plan.out'
                         }
                         break
                         
                         case 'Apply':
+                        when {
+        expression {
+            // Only apply if the plan was successful
+            return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
+        }
+                        }
                         stage('Terraform Apply') {
                              // terraform plan output saved in plan.output file
                             sh 'terraform plan -out=plan.out'
