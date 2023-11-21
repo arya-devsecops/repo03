@@ -64,7 +64,7 @@ options {
 
         stage('Terraform Destroy') {
             when {
-                expression { params.Action =='Destroy' }
+                expression { params.Action =='Destroy' && currentBuild.resultIsBetterOrEqualTo('SUCCESS') }
             }
             steps {
                 script {
