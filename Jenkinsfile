@@ -39,6 +39,11 @@ options {
             }
         }
          stage('Terraform Plan') {
+              when {
+        expression {
+            // Only apply if the plan was successful
+            return currentBuild.resultIsBetterOrEqualTo('SUCCESS')
+        }
             when {
                 expression { params.Action in ['Plan' , 'Apply' , 'Destroy'] }
             }
