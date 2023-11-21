@@ -52,7 +52,7 @@ options {
 
         stage('Terraform Apply') {
             when {
-                expression { params.Action == ['Apply' , 'Plan'] }
+                expression { params.Action in ['Apply' , 'Plan'] }
             }
             steps {
                 script {
