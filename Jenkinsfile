@@ -38,9 +38,9 @@ options {
                 }
             }
         }
-        stage('Terraform Plan') {
+         stage('Terraform Plan') {
             when {
-                expression { params.Plan }
+                expression { params.Action == 'Plan' }
             }
             steps {
                 script {
@@ -52,7 +52,7 @@ options {
 
         stage('Terraform Apply') {
             when {
-                expression { params.Apply }
+                expression { params.Action == 'Apply' }
             }
             steps {
                 script {
@@ -64,7 +64,7 @@ options {
 
         stage('Terraform Destroy') {
             when {
-                expression { params.Destroy }
+                expression { params.Action == 'Destroy' }
             }
             steps {
                 script {
