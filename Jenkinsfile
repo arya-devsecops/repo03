@@ -56,6 +56,7 @@ options {
             }
             steps {
                 script {
+                    input "Please approve to proceed Apply"
                     echo 'Executing terraform apply...'
                     sh 'terraform apply "plan.out"'
                 }
@@ -68,6 +69,7 @@ options {
             }
             steps {
                 script {
+                    input "Please approve to proceed Destroy"
                     echo 'Executing terraform destroy...'
                     sh 'terraform destroy -auto-approve'
                 }
